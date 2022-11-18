@@ -9,35 +9,30 @@ from eralchemy2 import render_er
 Base = declarative_base()
 
 
-class User(Base):
-    __tablename__ = 'user'
-    ID = Column(Integer, primary_key=True)
-    username = Column(String(250), nullable=False)
-    firstname = Column(String(250), nullable=False)
-    lastname = Column(String(250), nullable=False)
-    email = Column(String(250), nullable=False)
+class USER(Base):
+    __tablename__ = 'USER'
+    user_id = Column(Integer, primary_key=True)
+    Password = Column(String(8))
 
 
-class Comment(Base):
-    __tablename__ = 'comment'
+class PLANETAS(Base):
+    __tablename__ = 'PLANETS'
     ID = Column(Integer, primary_key=True)
     comment_text = Column(String(250))
-    author_id = Column(String(250), ForeignKey("user.id"))
-    post_id = Column(String(250), ForeignKey("post.id"))
 
 
-class Post(Base):
-    __tablename__ = 'post'
+class PERSONAS(Base):
+    __tablename__ = 'PERSONAS'
     ID = Column(Integer, primary_key=True)
-    user_id = Column(String(250), ForeignKey("user.id"))
+    comment_text = Column(String(250))
 
 
-class Media(Base):
-    __tablename__ = 'media'
-    ID = Column(Integer, primary_key=True)
-    type = Column(String(250))
-    url = Column(String(250))
-    post_id = Column(String(250), ForeignKey("post.id"))
+class FAVORITOS(Base):
+    __tablename__ = 'FAVORITOS'
+    user_id(Integer, ForeignKey("user.id"))
+    Planet_fav(String, ForeignKey("planetas.id"))
+    Personas_fav(String, ForeignKey("personas.id"))
+
 
 
 class Follower(Base):
